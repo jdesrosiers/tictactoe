@@ -1,10 +1,12 @@
 package tictactoe.ui
 
-import scala.io.StdIn
 import tictactoe._
+import tictactoe.player.Player
 import tictactoe.ui.render._
 
-class TicTacToeUI(game: TicTacToe, render: Render) {
+class TicTacToeUI(game: TicTacToe, playerX: Player, playerO: Player, render: Render) {
+  val player = Map('X -> playerX, 'O -> playerO)
+
   def play(board: Board = Board()): Unit = {
     clearConsole
     println("Let's Play Tic Tac Toe!")
@@ -17,7 +19,7 @@ class TicTacToeUI(game: TicTacToe, render: Render) {
       case 'draw => println("It's a draw")
       case 'inProgress =>
         print(s"It's ${render(board.player)}'s turn: ")
-        val move = Symbol(s"_${StdIn.readLine}")
+        val move = player(board.player).getMove(board)
 
         if (game.canPlay(move, board))
           play(board.play(move))
@@ -30,6 +32,9 @@ class TicTacToeUI(game: TicTacToe, render: Render) {
 }
 
 object TicTacToeUI {
-  def classic(game: TicTacToe) = new TicTacToeUI(game, new RenderClassic)
-  def fourByFour(game: TicTacToe) = new TicTacToeUI(game, new RenderFourByFour)
+  def classic(game: TicTacToe, playerX: Player, playerO: Player) =
+    new TicTacToeUI(game, playerX, playerO, new RenderClassic)
+
+  def fourByFour(game: TicTacToe, playerX: Player, playerO: Player) =
+    new TicTacToeUI(game, playerX, playerO, new RenderFourByFour)
 }
