@@ -3,7 +3,7 @@ package tictactoe
 import org.scalatest._
 
 class TicTacToeSpec extends FunSpec with Matchers {
-  val game = new TicTacToe()
+  val game = TicTacToe.classic
 
   describe("A Tic Tac Toe player") {
     it("should be able to play positions 1-9") {
