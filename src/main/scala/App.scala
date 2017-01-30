@@ -15,9 +15,8 @@ object App {
 
     println(render(board))
 
-    print(s"It's ${render(board.player)}'s turn: ")
-
-    if (board.player == 'X) { // Only supports player X
+    if (!game.allowedMoves(board).isEmpty) { // Not a good way to end the game, but all we have so far
+      print(s"It's ${render(board.player)}'s turn: ")
       val move = Symbol(s"_${StdIn.readLine}")
 
       if (game.canPlay(move, board))
