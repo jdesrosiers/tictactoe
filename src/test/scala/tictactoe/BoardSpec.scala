@@ -13,4 +13,11 @@ class BoardSpec extends FunSpec with Matchers {
       Board('X).player should equal('X)
     }
   }
+
+  describe("X Playing position 1") {
+    val board = Board('X).play('_1)
+
+    it("should result in a Board with 1 belonging to X") { board.at('_1) should equal (Some('X)) }
+    it("should result in a Board where the player is O") { board.player should equal ('O) }
+  }
 }
