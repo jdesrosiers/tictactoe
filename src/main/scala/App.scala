@@ -15,14 +15,18 @@ object App {
 
     println(render(board))
 
-    if (!game.allowedMoves(board).isEmpty) { // Not a good way to end the game, but all we have so far
-      print(s"It's ${render(board.player)}'s turn: ")
-      val move = Symbol(s"_${StdIn.readLine}")
+    game.state(board) match {
+      case 'xWins => println(s"${render('X)} wins!")
+      case 'oWins => println(s"${render('O)} wins!")
+      case 'draw => println("It's a draw")
+      case 'inProgress =>
+        print(s"It's ${render(board.player)}'s turn: ")
+        val move = Symbol(s"_${StdIn.readLine}")
 
-      if (game.canPlay(move, board))
-        play(board.play(move))
-      else
-        play(board)
+        if (game.canPlay(move, board))
+          play(board.play(move))
+        else
+          play(board)
     }
   }
 

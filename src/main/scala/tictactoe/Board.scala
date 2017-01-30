@@ -11,10 +11,7 @@ case class Board(player: Symbol = 'X, xs: Set[Symbol] = Set(), os: Set[Symbol] =
   }
 
   def at(position: Symbol) =
-    if (xs contains position)
-      Some('X)
-    else if (os contains position)
-      Some('O)
-    else
-      None
+    if (xs contains position) Some('X)
+    else if (os contains position) Some('O)
+    else None
 }
