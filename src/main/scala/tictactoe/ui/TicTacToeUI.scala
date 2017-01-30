@@ -31,4 +31,5 @@ class TicTacToeUI(game: TicTacToe, render: Render) {
 
 object TicTacToeUI {
   def classic(game: TicTacToe) = new TicTacToeUI(game, new RenderClassic)
+  def fourByFour(game: TicTacToe) = new TicTacToeUI(game, new RenderFourByFour)
 }

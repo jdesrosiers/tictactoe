@@ -12,7 +12,7 @@ class TicTacToe(positions: Set[Symbol], winStates: List[Set[Symbol]]) {
 }
 
 object TicTacToe {
-  def classic = {
+  val classic = {
     val positions = Set('_1, '_2, '_3, '_4, '_5, '_6, '_7, '_8, '_9)
     val winStates = List(
       // rows
@@ -28,6 +28,29 @@ object TicTacToe {
       // diagonals
       Set('_7, '_5, '_3),
       Set('_9, '_5, '_1)
+    )
+
+    new TicTacToe(positions, winStates)
+  }
+
+  val fourByFour = {
+    val positions = Set('_1, '_2, '_3, '_4, '_5, '_6, '_7, '_8, '_9, '_a, '_b, '_c, '_d, '_e, '_f, '_g)
+    val winStates = List(
+      // rows
+      Set('_1, '_2, '_3, '_4),
+      Set('_5, '_6, '_7, '_8),
+      Set('_9, '_a, '_b, '_c),
+      Set('_d, '_e, '_f, '_g),
+
+      // columns
+      Set('_1, '_5, '_9, '_d),
+      Set('_2, '_6, '_a, '_e),
+      Set('_3, '_7, '_b, '_f),
+      Set('_4, '_8, '_c, '_g),
+
+      // diagonals
+      Set('_1, '_6, '_b, '_g),
+      Set('_4, '_7, '_a, '_d)
     )
 
     new TicTacToe(positions, winStates)
