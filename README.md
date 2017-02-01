@@ -11,8 +11,17 @@ thing to do.  When the UI requires another bit of functionality to advance, I TD
 incorporate it into the UI.
 
 ### Play the Game
-To play classic Tic Tac Toe, run `activator run`
-To Paly 4x4 Tic Tac Toe, run `activator "run --game=4x4"`
+To play classic Tic Tac Toe, run `activator "run-main Classic"`
+To Paly 4x4 Tic Tac Toe, run `activator "run-main FourByFour"`
+
+By default, X is played by the user and O is played by a minimax agent.  These defaults can be overridden
+using command line arguments.
+
+`activator "run-main Classic --X=minimax --O=human"`
+
+You can also specify the depth limit of the minimax agent.
+
+`activator "run-main Classic --O=minimax,2"`
 
 ### Tests
 The test framework used is [ScalaTest](http://www.scalatest.org/)
@@ -29,4 +38,12 @@ player has played.  The board should no make any assumptions about the structure
 TicTacToe class will define the structure and rules of the game.
 
 ### Generic Rules
-The TicTacToe game logic does not make assumptions about the structure of the board.  This allows us to easily construct Tic Toe Toe games with different board configurations than the classic 3x3 board.  A 3x3 and 4x4 board were constructed to demonstrate this ability.
+The TicTacToe game logic does not make assumptions about the structure of the board.  This allows us
+to easily construct Tic Toe Toe games with different board configurations than the classic 3x3 board.
+A 3x3 and 4x4 board were constructed to demonstrate this ability.
+
+### AI
+The AI player uses a depth limited minimax algorithm with alpha beta prunning.  It's common for the
+algorithm to give the same score to multiple children nodes.  If there are multiple "best" move
+options, the algorithm will randomly choose between the options.  This makes games a little more
+interesting especially when you have two AI players playing against each other.
