@@ -14,9 +14,8 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
   val game = TicTacToe.classic
 
   describe("MinimaxPlayer at a leaf node") {
-    val player = new MinimaxPlayer(game, 0, true)
-
     it("should be null if X has won") {
+      val player = new MinimaxPlayer(game, 0)
       val board = mkBoard('O, List(
         "OO-",
         "---",
@@ -26,6 +25,7 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
     }
 
     it("should be null if O has won") {
+      val player = new MinimaxPlayer(game, 0)
       val board = mkBoard('X, List(
         "XX-",
         "-X-",
@@ -35,6 +35,7 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
     }
 
     it("should be null if it's a draw") {
+      val player = new MinimaxPlayer(game, 0)
       val board = mkBoard('O, List(
         "XOO",
         "OXX",
@@ -46,16 +47,20 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
 
   describe("MinimaxPlayer one step from a solution") {
     it("should find a solution for X") {
-      val player = new MinimaxPlayer(game, 1, true)
-      val board = Board('X, Set('_1, '_2), Set())
+      val player = new MinimaxPlayer(game, 1)
+      val board = mkBoard('X, List(
+        "OO-",
+        "---",
+        "XX-"
+      ).mkString)
       player.getMove(board) should equal ('_3)
     }
 
     it("should find a solution for O") {
-      val player = new MinimaxPlayer(game, 1, false)
+      val player = new MinimaxPlayer(game, 1)
       val board = mkBoard('O, List(
-        "-x-",
-        "-X-",
+        "XX-",
+        "X--",
         "OO-"
       ).mkString)
       player.getMove(board) should equal ('_3)
@@ -64,20 +69,20 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
 
   describe("MinimaxPlayer where opponent can win in one move") {
     it("should block O from winning if it is playing X") {
-      val player = new MinimaxPlayer(game, 2, true)
+      val player = new MinimaxPlayer(game, 2)
       val board = mkBoard('X, List(
-        "--O",
-        "-O-",
-        "XX-"
+        "O-O",
+        "-X-",
+        "X--"
       ).mkString)
-      player.getMove(board) should equal ('_3)
+      player.getMove(board) should equal ('_8)
     }
 
     it("should block X from winning if it is playing O") {
-      val player = new MinimaxPlayer(game, 2, false)
+      val player = new MinimaxPlayer(game, 2)
       val board = mkBoard('O, List(
-        "O-O",
-        "-X-",
+        "X-X",
+        "-O-",
         "---"
       ).mkString)
       player.getMove(board) should equal ('_8)
@@ -86,7 +91,7 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
 
   describe("Minimax with multiple options of the same value") {
     it("should choose a random position") {
-      val player = new MinimaxPlayer(game, 2, true)
+      val player = new MinimaxPlayer(game, 2)
       val board = mkBoard('X, List(
         "-O-",
         "XOO",

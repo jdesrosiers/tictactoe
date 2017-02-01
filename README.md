@@ -43,7 +43,7 @@ to easily construct Tic Toe Toe games with different board configurations than t
 A 3x3 and 4x4 board were constructed to demonstrate this ability.
 
 ### AI
-The AI player uses a depth limited minimax algorithm with alpha beta prunning.  It's common for the
+The AI player uses a depth limited negamax algorithm with alpha beta prunning.  It's common for the
 algorithm to give the same score to multiple children nodes.  If there are multiple "best" move
 options, the algorithm will randomly choose between the options.  This makes games a little more
 interesting especially when you have two AI players playing against each other.

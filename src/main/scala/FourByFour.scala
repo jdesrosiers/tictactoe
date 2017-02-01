@@ -13,8 +13,8 @@ object FourByFour {
     val options = buildOptions(args, defaultOptions)
 
     val game = TicTacToe.fourByFour
-    val playerX = buildPlayer('X, options('X), game)
-    val playerO = buildPlayer('O, options('O), game)
+    val playerX = buildPlayer(options('X), game)
+    val playerO = buildPlayer(options('O), game)
     TicTacToeUI.fourByFour(game, playerX, playerO).play()
   }
 
@@ -24,9 +24,9 @@ object FourByFour {
   }
 
   val minimax = """minimax(?:,(\d+))?""".r
-  def buildPlayer(player: Symbol, playerType: String, game: TicTacToe) = playerType match {
+  def buildPlayer(playerType: String, game: TicTacToe) = playerType match {
     case "human" => new ConsolePlayer()
-    case minimax(null) => new MinimaxPlayer(game, defaultMinimaxDepth, player == 'X)
-    case minimax(depthLimit) => new MinimaxPlayer(game, depthLimit.toInt, player == 'X)
+    case minimax(null) => new MinimaxPlayer(game, defaultMinimaxDepth)
+    case minimax(depthLimit) => new MinimaxPlayer(game, depthLimit.toInt)
   }
 }
