@@ -1,10 +1,10 @@
 package tictactoe
 
 class TicTacToe(positions: Set[Symbol], winStates: List[Set[Symbol]]) {
-  def canPlay(position: Symbol, board: Board) = (positions -- board.xs -- board.os) contains position
-  def allowedMoves(board: Board) = positions.filter(canPlay(_, board))
+  def canPlay(position: Symbol, board: Board): Boolean = (positions -- board.xs -- board.os) contains position
+  def allowedMoves(board: Board): Set[Symbol] = positions.filter(canPlay(_, board))
 
-  def state(board: Board) =
+  def state(board: Board): Symbol =
     if (winStates.exists(_ subsetOf board.xs)) 'xWins
     else if (winStates.exists(_ subsetOf board.os)) 'oWins
     else if (allowedMoves(board).isEmpty) 'draw
@@ -12,7 +12,7 @@ class TicTacToe(positions: Set[Symbol], winStates: List[Set[Symbol]]) {
 }
 
 object TicTacToe {
-  val classic = {
+  val classic: TicTacToe = {
     val positions = Set('_1, '_2, '_3, '_4, '_5, '_6, '_7, '_8, '_9)
     val winStates = List(
       // rows
@@ -33,7 +33,7 @@ object TicTacToe {
     new TicTacToe(positions, winStates)
   }
 
-  val fourByFour = {
+  val fourByFour: TicTacToe = {
     val positions = Set('_1, '_2, '_3, '_4, '_5, '_6, '_7, '_8, '_9, '_a, '_b, '_c, '_d, '_e, '_f, '_g)
     val winStates = List(
       // rows

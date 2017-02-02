@@ -8,7 +8,7 @@ class TicTacToeUI(game: TicTacToe, playerX: Player, playerO: Player, render: Ren
   val player = Map('X -> playerX, 'O -> playerO)
 
   def play(board: Board = Board()): Unit = {
-    clearConsole
+    clearConsole()
     println("Let's Play Tic Tac Toe!")
 
     println(render(board))
@@ -28,7 +28,7 @@ class TicTacToeUI(game: TicTacToe, playerX: Player, playerO: Player, render: Ren
     }
   }
 
-  def clearConsole = print("\u001b[2J\u001b[0;0H")
+  def clearConsole(): Unit = print("\u001b[2J\u001b[0;0H")
 }
 
 object TicTacToeUI {

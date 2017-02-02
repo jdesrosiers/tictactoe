@@ -4,14 +4,14 @@ import org.scalatest._
 import tictactoe._
 
 class MinimaxPlayerSpec extends FunSpec with Matchers {
-  def mkBoard(player: Symbol, str: String) = {
+  private def mkBoard(player: Symbol, str: String) = {
     val state = List('_7, '_8, '_9, '_4, '_5, '_6, '_1, '_2, '_3) zip str
     val xs = for ((position, player) <- state if player == 'X') yield position
     val os = for ((position, player) <- state if player == 'O') yield position
     Board(player, xs.toSet, os.toSet)
   }
 
-  val game = TicTacToe.classic
+  private val game = TicTacToe.classic
 
   describe("MinimaxPlayer at a leaf node") {
     it("should be null if X has won") {

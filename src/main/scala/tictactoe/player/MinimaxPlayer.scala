@@ -6,7 +6,7 @@ import tictactoe._
 class MinimaxPlayer(game: TicTacToe, depthLimit: Int) extends Player {
   case class Node(position: Symbol, score: Int)
 
-  def getMove(board: Board) = minimax(board, depthLimit).position
+  def getMove(board: Board): Symbol = minimax(board, depthLimit).position
 
   // alpha can't be Int.MinValue because Int.MinValue == -Int.MinValue
   private def minimax(board: Board, depth: Int, alpha: Int = -Int.MaxValue, beta: Int = Int.MaxValue): Node =

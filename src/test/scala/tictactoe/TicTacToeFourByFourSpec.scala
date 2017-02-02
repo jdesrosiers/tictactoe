@@ -3,7 +3,7 @@ package tictactoe
 import org.scalatest._
 
 class TicTacToeFourByFourSpec extends FunSpec with Matchers {
-  val game = TicTacToe.fourByFour
+  private val game = TicTacToe.fourByFour
 
   describe("A Tic Tac Toe player") {
     it("should be able to play positions 1-g") {

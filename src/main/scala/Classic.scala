@@ -18,13 +18,13 @@ object Classic {
     TicTacToeUI.classic(game, playerX, playerO).play()
   }
 
-  val option = """--(\w+)=(.+)""".r
-  def buildOptions(args: Array[String], defaults: Map[Symbol, String]) = defaults ++ args.map {
-    case option(key, value) => (Symbol(key) -> value)
+  private val option = """--(\w+)=(.+)""".r
+  private def buildOptions(args: Array[String], defaults: Map[Symbol, String]) = defaults ++ args.map {
+    case option(key, value) => Symbol(key) -> value
   }
 
-  val minimax = """minimax(?:,(\d+))?""".r
-  def buildPlayer(playerType: String, game: TicTacToe) = playerType match {
+  private val minimax = """minimax(?:,(\d+))?""".r
+  private def buildPlayer(playerType: String, game: TicTacToe) = playerType match {
     case "human" => new ConsolePlayer()
     case minimax(null) => new MinimaxPlayer(game, defaultMinimaxDepth)
     case minimax(depthLimit) => new MinimaxPlayer(game, depthLimit.toInt)

@@ -12,7 +12,7 @@ incorporate it into the UI.
 
 ### Play the Game
 To play classic Tic Tac Toe, run `activator "run-main Classic"`
-To Paly 4x4 Tic Tac Toe, run `activator "run-main FourByFour"`
+To Play 4x4 Tic Tac Toe, run `activator "run-main FourByFour"`
 
 By default, X is played by the user and O is played by a minimax agent.  These defaults can be overridden
 using command line arguments.
@@ -43,7 +43,7 @@ to easily construct Tic Toe Toe games with different board configurations than t
 A 3x3 and 4x4 board were constructed to demonstrate this ability.
 
 ### AI
-The AI player uses a depth limited negamax algorithm with alpha beta prunning.  It's common for the
+The AI player uses a depth limited negamax algorithm with alpha beta pruning.  It's common for the
 algorithm to give the same score to multiple children nodes.  If there are multiple "best" move
 options, the algorithm will randomly choose between the options.  This makes games a little more
 interesting especially when you have two AI players playing against each other.
