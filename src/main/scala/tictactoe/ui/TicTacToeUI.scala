@@ -7,16 +7,16 @@ import tictactoe.ui.render._
 class TicTacToeUI(game: TicTacToe, playerX: Player, playerO: Player, render: Render) {
   val player = Map('X -> playerX, 'O -> playerO)
 
-  def play(board: Board = Board()): Unit = {
+  def play(board: Board = Board()): Board = {
     clearConsole()
     println("Let's Play Tic Tac Toe!")
 
     println(render(board))
 
     game.state(board) match {
-      case 'xWins => println(s"${render('X)} wins!")
-      case 'oWins => println(s"${render('O)} wins!")
-      case 'draw => println("It's a draw")
+      case 'xWins => println(s"${render('X)} wins!"); board
+      case 'oWins => println(s"${render('O)} wins!"); board
+      case 'draw => println("It's a draw"); board
       case 'inProgress =>
         print(s"It's ${render(board.player)}'s turn: ")
         val move = player(board.player).getMove(board)
