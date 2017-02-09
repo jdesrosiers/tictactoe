@@ -6,16 +6,16 @@ class RenderFourByFour() extends Render {
   val tokens = Map(
     'X -> (Console.RED + "X" + Console.RESET),
     'O -> (Console.BLUE + "O" + Console.RESET),
-    '_1 -> "1", '_2 -> "2", '_3 -> "3", '_4 -> "4",
-    '_5 -> "5", '_6 -> "6", '_7 -> "7", '_8 -> "8",
-    '_9 -> "9", '_a -> "a", '_b -> "b", '_c -> "c",
-    '_d -> "d", '_e -> "e", '_f -> "f", '_g -> "g"
+    'A1 -> "1", 'A2 -> "2", 'A3 -> "3", 'A4 -> "4",
+    'B1 -> "5", 'B2 -> "6", 'B3 -> "7", 'B4 -> "8",
+    'C1 -> "9", 'C2 -> "a", 'C3 -> "b", 'C4 -> "c",
+    'D1 -> "d", 'D2 -> "e", 'D3 -> "f", 'D4 -> "g"
   )
 
   def apply(token: Symbol): String = tokens(token)
 
   def apply(board: Board): String = {
-    val replacements = for (position <- List('_1, '_2, '_3, '_4, '_5, '_6, '_7, '_8, '_9, '_a, '_b, '_c, '_d, '_e, '_f, '_g)) yield {
+    val replacements = for (position <- List('A1, 'A2, 'A3, 'A4, 'B1, 'B2, 'B3, 'B4, 'C1, 'C2, 'C3, 'C4, 'D1, 'D2, 'D3, 'D4)) yield {
       board.at(position) match {
         case Some(player) => apply(player)
         case None => apply(position)

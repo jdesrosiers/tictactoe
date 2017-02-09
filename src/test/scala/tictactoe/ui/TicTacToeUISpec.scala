@@ -10,8 +10,8 @@ class TicTacToeUISpec extends FunSpec with Matchers {
 
   describe("TicTacToe.play") {
     it("should run through a game where X wins") {
-      val playerX = new StubPlayer(List('_1, '_2, '_3))
-      val playerO = new StubPlayer(List('_7, '_8, '_9))
+      val playerX = new StubPlayer(List('bottomLeft, 'bottomMiddle, 'bottomRight))
+      val playerO = new StubPlayer(List('topLeft, 'topMiddle, 'topRight))
       val ui = TicTacToeUI.classic(game, playerX, playerO)
 
       Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output
@@ -20,8 +20,8 @@ class TicTacToeUISpec extends FunSpec with Matchers {
     }
 
     it("should run through a game where O wins") {
-      val playerX = new StubPlayer(List('_1, '_2, '_4))
-      val playerO = new StubPlayer(List('_7, '_8, '_9))
+      val playerX = new StubPlayer(List('bottomLeft, 'bottomMiddle, 'middleLeft))
+      val playerO = new StubPlayer(List('topLeft, 'topMiddle, 'topRight))
       val ui = TicTacToeUI.classic(game, playerX, playerO)
 
       Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output
@@ -30,8 +30,8 @@ class TicTacToeUISpec extends FunSpec with Matchers {
     }
 
     it("should run through a game that ends in a draw") {
-      val playerX = new StubPlayer(List('_7, '_8, '_6, '_1, '_2))
-      val playerO = new StubPlayer(List('_9, '_4, '_5, '_3))
+      val playerX = new StubPlayer(List('topLeft, 'topMiddle, 'middleRight, 'bottomLeft, 'bottomMiddle))
+      val playerO = new StubPlayer(List('topRight, 'middleLeft, 'center, 'bottomRight))
       val ui = TicTacToeUI.classic(game, playerX, playerO)
 
       Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output
@@ -40,8 +40,8 @@ class TicTacToeUISpec extends FunSpec with Matchers {
     }
 
     it("should not advance to the next player if an invalid position is played") {
-      val playerX = new StubPlayer(List('_a, '_1, '_2, '_3))
-      val playerO = new StubPlayer(List('_7, '_8, '_9))
+      val playerX = new StubPlayer(List('_a, 'bottomLeft, 'bottomMiddle, 'bottomRight))
+      val playerO = new StubPlayer(List('topLeft, 'topMiddle, 'topRight))
       val ui = TicTacToeUI.classic(game, playerX, playerO)
 
       Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output
@@ -50,8 +50,8 @@ class TicTacToeUISpec extends FunSpec with Matchers {
     }
 
     it("should not advance to the next player if a position that has already been played is played") {
-      val playerX = new StubPlayer(List('_1, '_7, '_2, '_3))
-      val playerO = new StubPlayer(List('_7, '_8, '_9))
+      val playerX = new StubPlayer(List('bottomLeft, 'topLeft, 'bottomMiddle, 'bottomRight))
+      val playerO = new StubPlayer(List('topLeft, 'topMiddle, 'topRight))
       val ui = TicTacToeUI.classic(game, playerX, playerO)
 
       Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output

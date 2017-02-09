@@ -5,7 +5,11 @@ import tictactoe._
 
 class MinimaxPlayerSpec extends FunSpec with Matchers {
   private def mkBoard(player: Symbol, str: String) = {
-    val state = List('_7, '_8, '_9, '_4, '_5, '_6, '_1, '_2, '_3) zip str
+    val state = List(
+      'topLeft, 'topMiddle, 'topRight,
+      'middleLeft, 'center, 'middleRight,
+      'bottomLeft, 'bottomMiddle, 'bottomRight
+    ) zip str
     val xs = for ((position, player) <- state if player == 'X') yield position
     val os = for ((position, player) <- state if player == 'O') yield position
     Board(player, xs.toSet, os.toSet)
@@ -53,7 +57,7 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
         "---",
         "XX-"
       ).mkString)
-      player.getMove(board) should equal ('_3)
+      player.getMove(board) should equal ('bottomRight)
     }
 
     it("should find a solution for O") {
@@ -63,7 +67,7 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
         "X--",
         "OO-"
       ).mkString)
-      player.getMove(board) should equal ('_3)
+      player.getMove(board) should equal ('bottomRight)
     }
   }
 
@@ -75,7 +79,7 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
         "-X-",
         "X--"
       ).mkString)
-      player.getMove(board) should equal ('_8)
+      player.getMove(board) should equal ('topMiddle)
     }
 
     it("should block X from winning if it is playing O") {
@@ -85,7 +89,7 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
         "-O-",
         "---"
       ).mkString)
-      player.getMove(board) should equal ('_8)
+      player.getMove(board) should equal ('topMiddle)
     }
   }
 
@@ -97,7 +101,7 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
         "XOO",
         "XX-"
       ).mkString)
-      Set('_3, '_7, '_9) contains player.getMove(board) should be (true)
+      Set('bottomRight, 'topLeft, 'topRight) contains player.getMove(board) should be (true)
     }
   }
 }

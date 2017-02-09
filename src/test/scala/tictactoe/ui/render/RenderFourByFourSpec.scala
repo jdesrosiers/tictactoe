@@ -20,22 +20,22 @@ class RenderFourByFourSpec extends FunSpec with Matchers {
 
   describe("Board positions") {
     it("should render a numeric position based on the position given") {
-      render('_1) should equal ("1")
-      render('_2) should equal ("2")
-      render('_3) should equal ("3")
-      render('_4) should equal ("4")
-      render('_5) should equal ("5")
-      render('_6) should equal ("6")
-      render('_7) should equal ("7")
-      render('_8) should equal ("8")
-      render('_9) should equal ("9")
-      render('_a) should equal ("a")
-      render('_b) should equal ("b")
-      render('_c) should equal ("c")
-      render('_d) should equal ("d")
-      render('_e) should equal ("e")
-      render('_f) should equal ("f")
-      render('_g) should equal ("g")
+      render('A1) should equal ("1")
+      render('A2) should equal ("2")
+      render('A3) should equal ("3")
+      render('A4) should equal ("4")
+      render('B1) should equal ("5")
+      render('B2) should equal ("6")
+      render('B3) should equal ("7")
+      render('B4) should equal ("8")
+      render('C1) should equal ("9")
+      render('C2) should equal ("a")
+      render('C3) should equal ("b")
+      render('C4) should equal ("c")
+      render('D1) should equal ("d")
+      render('D2) should equal ("e")
+      render('D3) should equal ("f")
+      render('D4) should equal ("g")
     }
   }
 
@@ -64,7 +64,7 @@ class RenderFourByFourSpec extends FunSpec with Matchers {
     ═══╬═══╬═══╬═══
      d ║ e ║ f ║ g
     """
-      render(Board('X, Set('_7, '_a), Set())) should equal (expected)
+      render(Board('X, Set('B3, 'C2), Set())) should equal (expected)
     }
 
     it("should display an O on board positions played by the second player") {
@@ -78,7 +78,7 @@ class RenderFourByFourSpec extends FunSpec with Matchers {
     ═══╬═══╬═══╬═══
      d ║ e ║ f ║$o
     """
-      render(Board('X, Set(), Set('_3, '_g))) should equal (expected)
+      render(Board('X, Set(), Set('A3, 'D4))) should equal (expected)
     }
   }
 }

@@ -20,15 +20,15 @@ class RenderClassicSpec extends FunSpec with Matchers {
 
   describe("Board positions") {
     it("should render a numeric position based on the position given") {
-      render('_1) should equal ("1")
-      render('_2) should equal ("2")
-      render('_3) should equal ("3")
-      render('_4) should equal ("4")
-      render('_5) should equal ("5")
-      render('_6) should equal ("6")
-      render('_7) should equal ("7")
-      render('_8) should equal ("8")
-      render('_9) should equal ("9")
+      render('bottomLeft) should equal ("1")
+      render('bottomMiddle) should equal ("2")
+      render('bottomRight) should equal ("3")
+      render('middleLeft) should equal ("4")
+      render('center) should equal ("5")
+      render('middleRight) should equal ("6")
+      render('topLeft) should equal ("7")
+      render('topMiddle) should equal ("8")
+      render('topRight) should equal ("9")
     }
   }
 
@@ -53,7 +53,7 @@ class RenderClassicSpec extends FunSpec with Matchers {
     ═══╬═══╬═══
      1 ║ 2 ║ 3
     """
-      render(Board('X, Set('_7, '_5), Set())) should equal (expected)
+      render(Board('X, Set('topLeft, 'center), Set())) should equal (expected)
     }
 
     it("should display an X on board positions played by the second player") {
@@ -65,7 +65,7 @@ class RenderClassicSpec extends FunSpec with Matchers {
     ═══╬═══╬═══
     $o ║ 2 ║ 3
     """
-      render(Board('X, Set(), Set('_6, '_1))) should equal (expected)
+      render(Board('X, Set(), Set('middleRight, 'bottomLeft))) should equal (expected)
     }
   }
 }

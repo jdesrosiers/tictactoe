@@ -1,5 +1,5 @@
 import tictactoe.TicTacToe
-import tictactoe.player.{ConsolePlayer, MinimaxPlayer}
+import tictactoe.player.{ConsoleClassicPlayer, MinimaxPlayer}
 import tictactoe.ui.TicTacToeUI
 
 object Classic {
@@ -25,7 +25,7 @@ object Classic {
 
   private val minimax = """minimax(?:,(\d+))?""".r
   private def buildPlayer(playerType: String, game: TicTacToe) = playerType match {
-    case "human" => new ConsolePlayer()
+    case "human" => new ConsoleClassicPlayer()
     case minimax(null) => new MinimaxPlayer(game, defaultMinimaxDepth)
     case minimax(depthLimit) => new MinimaxPlayer(game, depthLimit.toInt)
   }
