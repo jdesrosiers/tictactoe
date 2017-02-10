@@ -1,8 +1,9 @@
-package tictactoe.ui
+package tictactoeui
 
-import tictactoe._
-import tictactoe.player.Player
-import tictactoe.ui.render._
+import tictactoe.{TicTacToe, Board}
+import tictactoeui.Player
+import tictactoeui.classic.RenderClassic
+import tictactoeui.fourbyfour.RenderFourByFour
 
 class TicTacToeUI(game: TicTacToe, playerX: Player, playerO: Player, render: Render) {
   val player = Map('X -> playerX, 'O -> playerO)

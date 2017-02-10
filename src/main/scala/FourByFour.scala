@@ -1,6 +1,7 @@
 import tictactoe.TicTacToe
-import tictactoe.player.{ConsoleFourByFourPlayer, MinimaxPlayer}
-import tictactoe.ui.TicTacToeUI
+import tictactoeui.MinimaxPlayer
+import tictactoeui.TicTacToeUI
+import tictactoeui.fourbyfour.ConsoleFourByFourPlayer
 
 object FourByFour {
   val defaultMinimaxDepth = 5

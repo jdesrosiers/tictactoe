@@ -1,4 +1,4 @@
-package tictactoe.player
+package tictactoeui.classic
 
 import org.scalatest._
 
@@ -40,5 +40,5 @@ class ConsoleClassicPlayerSpec extends FunSpec with Matchers {
     }
   }
 
-  def withInput[T](input: String)(thunk: => T) = Console.withIn(new StringReader(input)) { thunk }
+  private def withInput[T](input: String)(thunk: => T) = Console.withIn(new StringReader(input)) { thunk }
 }

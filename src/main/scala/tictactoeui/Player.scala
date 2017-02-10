@@ -1,4 +1,4 @@
-package tictactoe.player
+package tictactoeui
 
 import tictactoe.Board
 

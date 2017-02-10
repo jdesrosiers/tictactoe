@@ -1,4 +1,4 @@
-package tictactoe.player
+package tictactoeui.fourbyfour
 
 import org.scalatest._
 
@@ -62,5 +62,5 @@ class ConsoleFourByFourPlayerSpec extends FunSpec with Matchers {
     }
   }
 
-  def withInput[T](input: String)(thunk: => T) = Console.withIn(new StringReader(input)) { thunk }
+  private def withInput[T](input: String)(thunk: => T) = Console.withIn(new StringReader(input)) { thunk }
 }

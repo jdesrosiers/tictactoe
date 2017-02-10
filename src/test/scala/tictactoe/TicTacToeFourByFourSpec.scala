@@ -6,7 +6,7 @@ class TicTacToeFourByFourSpec extends FunSpec with Matchers {
   private val game = TicTacToe.fourByFour
 
   describe("A Tic Tac Toe player") {
-    it("should be able to play positions 1-g") {
+    it("should be able to play all board positions") {
       val expected = List('A1, 'A2, 'A3, 'A4, 'B1, 'B2, 'B3, 'B4, 'C1, 'C2, 'C3, 'C4, 'D1, 'D2, 'D3, 'D4)
       game.allowedMoves(Board()) should contain theSameElementsAs expected
     }

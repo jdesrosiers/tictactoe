@@ -1,6 +1,7 @@
-package tictactoe.ui.render
+package tictactoeui.fourbyfour
 
 import tictactoe.Board
+import tictactoeui.Render
 
 class RenderFourByFour() extends Render {
   val tokens = Map(

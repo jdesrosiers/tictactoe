@@ -1,7 +1,8 @@
-package tictactoe.player
+package tictactoeui.classic
 
 import scala.io.StdIn
 import tictactoe.Board
+import tictactoeui.Player
 
 class ConsoleClassicPlayer() extends Player {
   val positions = Map(
@@ -10,7 +11,7 @@ class ConsoleClassicPlayer() extends Player {
     "1" -> 'bottomLeft, "2" -> 'bottomMiddle, "3" -> 'bottomRight
   )
 
-  def getMove(board: Board) = positions.get(StdIn.readLine) match {
+  def getMove(board: Board): Symbol = positions.get(StdIn.readLine) match {
     case Some(position) => position
     case None => Symbol("")
   }

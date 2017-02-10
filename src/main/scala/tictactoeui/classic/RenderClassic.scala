@@ -1,6 +1,7 @@
-package tictactoe.ui.render
+package tictactoeui.classic
 
 import tictactoe.Board
+import tictactoeui.Render
 
 class RenderClassic() extends Render {
   val tokens = Map(

@@ -1,4 +1,4 @@
-package tictactoe.ui.render
+package tictactoeui.classic
 
 import org.scalatest._
 import tictactoe.Board

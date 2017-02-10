@@ -1,12 +1,12 @@
-package tictactoe.ui
+package tictactoeui
 
 import org.scalatest._
 
 import tictactoe.{Board, TicTacToe}
-import tictactoe.player.Player
+import tictactoeui.Player
 
 class TicTacToeUISpec extends FunSpec with Matchers {
-  val game = TicTacToe.classic
+  private val game = TicTacToe.classic
 
   describe("TicTacToe.play") {
     it("should run through a game where X wins") {
@@ -62,6 +62,6 @@ class TicTacToeUISpec extends FunSpec with Matchers {
 }
 
 class StubPlayer(moves: List[Symbol]) extends Player {
-  val moveIter = moves.iterator
+  private val moveIter = moves.iterator
   def getMove(board: Board): Symbol = moveIter.next
 }

@@ -1,6 +1,7 @@
 import tictactoe.TicTacToe
-import tictactoe.player.{ConsoleClassicPlayer, MinimaxPlayer}
-import tictactoe.ui.TicTacToeUI
+import tictactoeui.MinimaxPlayer
+import tictactoeui.TicTacToeUI
+import tictactoeui.classic.ConsoleClassicPlayer
 
 object Classic {
   val defaultMinimaxDepth = 6

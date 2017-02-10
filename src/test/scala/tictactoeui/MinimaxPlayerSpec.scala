@@ -1,4 +1,4 @@
-package tictactoe.player
+package tictactoeui
 
 import org.scalatest._
 import tictactoe._

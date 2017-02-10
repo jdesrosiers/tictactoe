@@ -1,7 +1,8 @@
-package tictactoe.player
+package tictactoeui.fourbyfour
 
 import scala.io.StdIn
 import tictactoe.Board
+import tictactoeui.Player
 
 class ConsoleFourByFourPlayer() extends Player {
   val positions = Map(
@@ -11,7 +12,7 @@ class ConsoleFourByFourPlayer() extends Player {
     "d" -> 'D1, "e" -> 'D2, "f" -> 'D3, "g" -> 'D4
   )
 
-  def getMove(board: Board) = positions.get(StdIn.readLine) match {
+  def getMove(board: Board): Symbol = positions.get(StdIn.readLine) match {
     case Some(position) => position
     case None => Symbol("")
   }
