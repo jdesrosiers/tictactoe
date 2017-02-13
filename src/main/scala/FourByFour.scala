@@ -1,33 +1,14 @@
-import tictactoe.TicTacToe
-import tictactoeui.MinimaxPlayer
-import tictactoeui.TicTacToeUI
-import tictactoeui.fourbyfour.ConsoleFourByFourPlayer
+import commandline.CommandLine
+import tictactoeui.TicTacToeUIFactory
+import tictactoeui.GameVariation
 
 object FourByFour {
-  val defaultMinimaxDepth = 5
-
   def main(args: Array[String]): Unit = {
-    val defaultOptions = Map(
-      'X -> "human",
-      'O -> s"minimax,$defaultMinimaxDepth"
-    )
-    val options = buildOptions(args, defaultOptions)
+    val config = Map('defaultMinimaxDepth -> "5")
+    val factory = new TicTacToeUIFactory(GameVariation.fourByFour, config)
 
-    val game = TicTacToe.fourByFour
-    val playerX = buildPlayer(options('X), game)
-    val playerO = buildPlayer(options('O), game)
-    TicTacToeUI.fourByFour(game, playerX, playerO).play()
-  }
-
-  private val option = """--(\w+)=(.+)""".r
-  private def buildOptions(args: Array[String], defaults: Map[Symbol, String]) = defaults ++ args.map {
-    case option(key, value) => Symbol(key) -> value
-  }
-
-  private val minimax = """minimax(?:,(\d+))?""".r
-  private def buildPlayer(playerType: String, game: TicTacToe) = playerType match {
-    case "human" => new ConsoleFourByFourPlayer()
-    case minimax(null) => new MinimaxPlayer(game, defaultMinimaxDepth)
-    case minimax(depthLimit) => new MinimaxPlayer(game, depthLimit.toInt)
+    val defaultOptions = Map('X -> "human", 'O -> "minimax")
+    val options = CommandLine.options(args, defaultOptions)
+    factory.build(options).play()
   }
 }

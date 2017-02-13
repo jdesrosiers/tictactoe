@@ -1,9 +1,6 @@
 package tictactoeui
 
 import tictactoe.{TicTacToe, Board}
-import tictactoeui.Player
-import tictactoeui.classic.RenderClassic
-import tictactoeui.fourbyfour.RenderFourByFour
 
 class TicTacToeUI(game: TicTacToe, playerX: Player, playerO: Player, render: Render) {
   val player = Map('X -> playerX, 'O -> playerO)
@@ -30,12 +27,4 @@ class TicTacToeUI(game: TicTacToe, playerX: Player, playerO: Player, render: Ren
   }
 
   def clearConsole(): Unit = print("\u001b[2J\u001b[0;0H")
-}
-
-object TicTacToeUI {
-  def classic(game: TicTacToe, playerX: Player, playerO: Player) =
-    new TicTacToeUI(game, playerX, playerO, new RenderClassic)
-
-  def fourByFour(game: TicTacToe, playerX: Player, playerO: Player) =
-    new TicTacToeUI(game, playerX, playerO, new RenderFourByFour)
 }
