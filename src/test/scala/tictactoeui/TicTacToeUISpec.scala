@@ -2,6 +2,7 @@ package tictactoeui
 
 import org.scalatest._
 
+import eventdispatcher.EventDispatcher
 import tictactoe.{Board, TicTacToe}
 
 class TicTacToeUISpec extends FunSpec with Matchers {
@@ -10,11 +11,13 @@ class TicTacToeUISpec extends FunSpec with Matchers {
       val game = TicTacToe.classic
       val playerX = new StubPlayer(List('bottomLeft, 'bottomMiddle, 'bottomRight))
       val playerO = new StubPlayer(List('topLeft, 'topMiddle, 'topRight))
-      val render = new StubRender
-      val ui = new TicTacToeUI(game, playerX, playerO, render)
+      val dispatcher = new EventDispatcher[Page]
+      var playSpy = 0
+      dispatcher.addListener('play) { _ => playSpy += 1 }
+      val ui = new TicTacToeUI(game, playerX, playerO, dispatcher)
 
       game.state(ui.play()) should equal ('xWins)
-      render.renderPageSpy should equal (6)
+      playSpy should equal (6)
     }
   }
 
@@ -41,15 +44,4 @@ class TicTacToeUISpec extends FunSpec with Matchers {
 class StubPlayer(moves: List[Symbol]) extends Player {
   private val moveIter = moves.iterator
   def getMove(board: Board): Symbol = moveIter.next
-}
-
-class StubRender extends Render {
-  var renderPageSpy = 0
-
-  def apply(token: Symbol): String = ???
-  def apply(board: Board): String = ???
-  override def apply(page: Page): String = {
-    renderPageSpy += 1
-    ""
-  }
 }

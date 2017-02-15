@@ -1,5 +1,6 @@
 package tictactoeui
 
+import eventdispatcher.EventDispatcher
 import tictactoe.TicTacToe
 import tictactoeui.classic.ConsoleClassicPlayer
 import tictactoeui.classic.RenderClassic
@@ -7,11 +8,13 @@ import tictactoeui.fourbyfour.ConsoleFourByFourPlayer
 import tictactoeui.fourbyfour.RenderFourByFour
 
 class TicTacToeUIFactory(gameVariation: GameVariation, config: Map[Symbol, String]) {
+  val dispatcher = new EventDispatcher[Page]
+  dispatcher.addListener('play) { page => print(gameVariation.render(page)) }
+
   def build(options: Map[Symbol, String]): TicTacToeUI = {
-    val game = gameVariation.game
-    val playerX = buildPlayer(options('X), game)
-    val playerO = buildPlayer(options('O), game)
-    new TicTacToeUI(game, playerX, playerO, gameVariation.renderer)
+    val playerX = buildPlayer(options('X), gameVariation.game)
+    val playerO = buildPlayer(options('O), gameVariation.game)
+    new TicTacToeUI(gameVariation.game, playerX, playerO, dispatcher)
   }
 
   private val minimax = """minimax(?:,(\d+))?""".r
@@ -22,7 +25,7 @@ class TicTacToeUIFactory(gameVariation: GameVariation, config: Map[Symbol, Strin
   }
 }
 
-case class GameVariation(game: TicTacToe, humanPlayer: Player, renderer: Render)
+case class GameVariation(game: TicTacToe, humanPlayer: Player, render: Render)
 
 object GameVariation {
   val classic = GameVariation(TicTacToe.classic, new ConsoleClassicPlayer, new RenderClassic)
