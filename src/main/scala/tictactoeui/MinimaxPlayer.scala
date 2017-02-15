@@ -1,9 +1,9 @@
 package tictactoeui
 
 import scala.util.Random
-import tictactoe._
+import tictactoe.Board
 
-class MinimaxPlayer(game: TicTacToe, val depthLimit: Int) extends Player {
+class MinimaxPlayer(game: Game, val depthLimit: Int) extends Player {
   case class Node(position: Symbol, score: Int)
 
   def getMove(board: Board): Symbol = minimax(board, depthLimit).position

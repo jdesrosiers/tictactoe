@@ -1,7 +1,6 @@
 package tictactoeui
 
 import eventdispatcher.EventDispatcher
-import tictactoe.TicTacToe
 import tictactoeui.classic.ConsoleClassicPlayer
 import tictactoeui.classic.RenderClassic
 import tictactoeui.fourbyfour.ConsoleFourByFourPlayer
@@ -18,16 +17,16 @@ class TicTacToeUIFactory(gameVariation: GameVariation, config: Map[Symbol, Strin
   }
 
   private val minimax = """minimax(?:,(\d+))?""".r
-  def buildPlayer(playerType: String, game: TicTacToe): Player = playerType match {
+  def buildPlayer(playerType: String, game: Game): Player = playerType match {
     case "human" => gameVariation.humanPlayer
     case minimax(null) => new MinimaxPlayer(game, config('defaultMinimaxDepth).toInt)
     case minimax(depthLimit) => new MinimaxPlayer(game, depthLimit.toInt)
   }
 }
 
-case class GameVariation(game: TicTacToe, humanPlayer: Player, render: Render)
+case class GameVariation(game: Game, humanPlayer: Player, render: Render)
 
 object GameVariation {
-  val classic = GameVariation(TicTacToe.classic, new ConsoleClassicPlayer, new RenderClassic)
-  val fourByFour = GameVariation(TicTacToe.fourByFour, new ConsoleFourByFourPlayer, new RenderFourByFour)
+  val classic = GameVariation(Game.classic, new ConsoleClassicPlayer, new RenderClassic)
+  val fourByFour = GameVariation(Game.fourByFour, new ConsoleFourByFourPlayer, new RenderFourByFour)
 }

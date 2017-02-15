@@ -1,10 +1,10 @@
 package tictactoeui
 
 import eventdispatcher.EventDispatcher
-import tictactoe.{TicTacToe, Board}
+import tictactoe.Board
 import scala.annotation.tailrec
 
-class TicTacToeUI(game: TicTacToe, playerX: Player, playerO: Player, dispatcher: EventDispatcher[Page]) {
+class TicTacToeUI(game: Game, playerX: Player, playerO: Player, dispatcher: EventDispatcher[Page]) {
   val player = Map('X -> playerX, 'O -> playerO)
 
   @tailrec

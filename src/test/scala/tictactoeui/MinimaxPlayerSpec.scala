@@ -1,7 +1,8 @@
 package tictactoeui
 
 import org.scalatest._
-import tictactoe._
+
+import tictactoe.Board
 
 class MinimaxPlayerSpec extends FunSpec with Matchers {
   private def mkBoard(player: Symbol, str: String) = {
@@ -15,7 +16,7 @@ class MinimaxPlayerSpec extends FunSpec with Matchers {
     Board(player, xs.toSet, os.toSet)
   }
 
-  private val game = TicTacToe.classic
+  private val game = Game.classic
 
   describe("MinimaxPlayer at a leaf node") {
     it("should be null if X has won") {
