@@ -1,30 +1,28 @@
 package tictactoeui
 
 import tictactoe.{TicTacToe, Board}
+import scala.annotation.tailrec
 
 class TicTacToeUI(game: TicTacToe, playerX: Player, playerO: Player, render: Render) {
   val player = Map('X -> playerX, 'O -> playerO)
 
-  def play(board: Board = Board()): Board = {
-    clearConsole()
-    println("Let's Play Tic Tac Toe!")
-
-    println(render(board))
-
-    game.state(board) match {
-      case 'xWins => println(s"${render('X)} wins!"); board
-      case 'oWins => println(s"${render('O)} wins!"); board
-      case 'draw => println("It's a draw"); board
+  @tailrec
+  final def play(board: Board = Board()): Board = {
+    val state = game.state(board)
+    print(render(Page(state, board)))
+    state match {
       case 'inProgress =>
-        print(s"It's ${render(board.player)}'s turn: ")
         val move = player(board.player).getMove(board)
-
-        if (game.canPlay(move, board))
-          play(board.play(move))
-        else
-          play(board)
+        val nextBoard = playTurn(move, board)
+        play(nextBoard)
+      case _ => board
     }
   }
 
-  def clearConsole(): Unit = print("\u001b[2J\u001b[0;0H")
+  def playTurn(move: Symbol, board: Board): Board = {
+    if (game.canPlay(move, board))
+      board.play(move)
+    else
+      board
+  }
 }

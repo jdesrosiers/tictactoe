@@ -5,57 +5,35 @@ import org.scalatest._
 import tictactoe.{Board, TicTacToe}
 
 class TicTacToeUISpec extends FunSpec with Matchers {
-  private val game = TicTacToe.classic
-
-  describe("TicTacToe.play") {
-    it("should run through a game where X wins") {
+  describe("TicTacToeUI.play") {
+    it("should loop until the game is finished") {
+      val game = TicTacToe.classic
       val playerX = new StubPlayer(List('bottomLeft, 'bottomMiddle, 'bottomRight))
       val playerO = new StubPlayer(List('topLeft, 'topMiddle, 'topRight))
-      val ui = new TicTacToeUI(game, playerX, playerO, new StubRender)
+      val render = new StubRender
+      val ui = new TicTacToeUI(game, playerX, playerO, render)
 
-      Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output
-        game.state(ui.play()) should equal ('xWins)
-      }
+      game.state(ui.play()) should equal ('xWins)
+      render.renderPageSpy should equal (6)
+    }
+  }
+
+  describe("TicTacToeUI.playTurn") {
+    val ui = new TicTacToeUI(TicTacToe.classic, null, null, null)
+
+    it("should return a board with a valid move applied") {
+      val board = Board('X)
+      ui.playTurn('topRight, board) should equal (Board('O, Set('topRight)))
     }
 
-    it("should run through a game where O wins") {
-      val playerX = new StubPlayer(List('bottomLeft, 'bottomMiddle, 'middleLeft))
-      val playerO = new StubPlayer(List('topLeft, 'topMiddle, 'topRight))
-      val ui = new TicTacToeUI(game, playerX, playerO, new StubRender)
-
-      Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output
-        game.state(ui.play()) should equal ('oWins)
-      }
+    it("should return an unmodified board if an invalid position is played") {
+      val board = Board('X)
+      ui.playTurn('invalidMove, board) should equal (board)
     }
 
-    it("should run through a game that ends in a draw") {
-      val playerX = new StubPlayer(List('topLeft, 'topMiddle, 'middleRight, 'bottomLeft, 'bottomMiddle))
-      val playerO = new StubPlayer(List('topRight, 'middleLeft, 'center, 'bottomRight))
-      val ui = new TicTacToeUI(game, playerX, playerO, new StubRender)
-
-      Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output
-        game.state(ui.play()) should equal ('draw)
-      }
-    }
-
-    it("should not advance to the next player if an invalid position is played") {
-      val playerX = new StubPlayer(List('_a, 'bottomLeft, 'bottomMiddle, 'bottomRight))
-      val playerO = new StubPlayer(List('topLeft, 'topMiddle, 'topRight))
-      val ui = new TicTacToeUI(game, playerX, playerO, new StubRender)
-
-      Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output
-        game.state(ui.play()) should equal ('xWins)
-      }
-    }
-
-    it("should not advance to the next player if a position that has already been played is played") {
-      val playerX = new StubPlayer(List('bottomLeft, 'topLeft, 'bottomMiddle, 'bottomRight))
-      val playerO = new StubPlayer(List('topLeft, 'topMiddle, 'topRight))
-      val ui = new TicTacToeUI(game, playerX, playerO, new StubRender)
-
-      Console.withOut(new java.io.ByteArrayOutputStream()) { // Suppress output
-        game.state(ui.play()) should equal ('xWins)
-      }
+    it("should return an unmodified board if a position that has already been played is played") {
+      val board = Board('X, Set('topRight))
+      ui.playTurn('topRight, board) should equal (board)
     }
   }
 }
@@ -66,6 +44,12 @@ class StubPlayer(moves: List[Symbol]) extends Player {
 }
 
 class StubRender extends Render {
-  def apply(token: Symbol) = ""
-  def apply(board: Board) = ""
+  var renderPageSpy = 0
+
+  def apply(token: Symbol): String = ???
+  def apply(board: Board): String = ???
+  override def apply(page: Page): String = {
+    renderPageSpy += 1
+    ""
+  }
 }

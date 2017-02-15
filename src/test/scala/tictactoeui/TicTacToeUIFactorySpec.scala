@@ -2,7 +2,6 @@ package tictactoeui
 
 import org.scalatest._
 
-import tictactoe.Board
 import tictactoeui.classic.ConsoleClassicPlayer
 
 class TicTacToeUIFactorySpec extends FunSpec with Matchers {
@@ -10,7 +9,7 @@ class TicTacToeUIFactorySpec extends FunSpec with Matchers {
     val config = Map[Symbol, String]('defaultMinimaxDepth -> "6")
     val factory = new TicTacToeUIFactory(GameVariation.classic, config)
 
-    it("should return the `getHumanPlayer` value for a human player") {
+    it("should return the game variation's `humanPlayer` value for a human player") {
       factory.buildPlayer("human", null) shouldBe a [ConsoleClassicPlayer]
     }
 
