@@ -2,6 +2,8 @@ name := "tic-tac-toe"
 
 version := "1.0"
 
+organization := "jdesrosiers"
+
 scalaVersion := "2.11.7"
 
 scalacOptions += "-feature"
